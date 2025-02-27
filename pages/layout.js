@@ -1,9 +1,14 @@
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+
 const Layout = ({ children }) => {
+  // console.log(MainLogo);
+
   return (
     <div>
-      <header>Header</header>
+      <Header />
       {children}
-      <footer>Footer</footer>
+      <Footer />
     </div>
   );
 };

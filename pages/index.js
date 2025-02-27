@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Montserrat } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import Card from "@/components/Card";
 
 
 const montserrat = Montserrat({
@@ -22,7 +23,7 @@ export default function Home() {
         className={`${styles.page} ${montserrat.variable}`}
       >
         <main className={styles.main}>
-          main
+          <Card/>
         </main>
       </div>
     </>
