@@ -1,16 +1,13 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import Card from "@/components/Card";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const montserrat = Montserrat({
   subsets: ["latin"],
+  weight: ["400", "600", "700"], // Добавьте нужные веса
+  variable: "--font-montserrat", // Создаст CSS-переменную
 });
 
 export default function Home() {
@@ -23,12 +20,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div
-        className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
+        className={`${styles.page} ${montserrat.variable}`}
       >
         <main className={styles.main}>
-          main
+          <Card/>
         </main>
-        
       </div>
     </>
   );
