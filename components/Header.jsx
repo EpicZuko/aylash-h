@@ -12,6 +12,7 @@ function Header() {
     const router = useRouter()
     const [searchValue, setSearchValue] = useState("")
     const [resultSearch, setResultSearch] = useState([])
+    const [isOpenResults, setIsOpenResults] = useState(false)
     const open = Boolean(anchorEl);
     function isActiveBtn(e) {
         setIsActive(e)
@@ -30,15 +31,22 @@ function Header() {
 
     function getSearchValueHandle(e) {
         setSearchValue(e.target.value)
+        setIsOpenResults(true)
     }
 
     useEffect(() => {
+        const result = [];
+        const seenTitles = new Set();
 
-        const result = products.filter((i) => {
+        products.forEach((i) => {
             if (searchValue.length > 0) {
-                return i.title.toLowerCase().includes(searchValue.toLowerCase())
+                const lowerTitle = i.title.toLowerCase();
+                if (lowerTitle.includes(searchValue.toLowerCase()) && !seenTitles.has(lowerTitle)) {
+                    seenTitles.add(lowerTitle);
+                    result.push(i);
+                }
             }
-        })
+        });
         setResultSearch(result)
     }, [searchValue])
 
@@ -85,18 +93,23 @@ function Header() {
                     <Typography sx={{ color: "#fff" }}>БОЛУМДОР</Typography>
                 </Box>
                 <Box sx={{ height: "40px", minWidth: { md: "300px", lg: "800px" }, display: "flex", position: "relative" }}>
-                    <Box onChange={getSearchValueHandle} component="input" placeholder='Издоо ...' sx={{
+                    <Box value={searchValue} onChange={getSearchValueHandle} component="input" placeholder='Издоо ...' sx={{
                         height: "100%", width: "100%", padding: "0 15px", borderRadius: "4px 0 0 4px",
                         border: "1px solid gray", outline: "none"
                     }} />
                     <Button sx={{ background: "#3F444A", color: "#fff", borderRadius: "0 4px 4px 0", height: "100%" }}>
                         <img src="/icons/search.svg" alt="" />
                     </Button>
-                    {searchValue.length > 0 && <Box sx={{ position: "absolute", padding: '10px', width: "100%", top: 45, background: "#fff" }}>
+                    {isOpenResults && searchValue.length > 0 && <Box sx={{ position: "absolute", padding: '10px', width: "100%", top: 45, background: "#fff", zIndex: 10 }}>
                         {resultSearch.length < 1 ? <Box sx={{ padding: "6px 10px", }}>Нечего не найден</Box> :
                             <Box>
                                 {resultSearch.map((i) => (
-                                    <Typography onClick={() => navigateNamdle(`/search/${i.title}`)} sx={{ padding: "6px 10px", borderRadius: "6px", margin: "4px", ":hover": { background: "#ffa60015" }, cursor: "pointer" }}>{i.title}</Typography>
+                                    <Typography onClick={() => {
+                                        navigateNamdle(`/search/${i.title}`)
+                                        setIsOpenResults(false)
+                                        setSearchValue(i.title)
+                                    }
+                                    } sx={{ padding: "6px 10px", borderRadius: "6px", margin: "4px", ":hover": { background: "#ffa60015" }, cursor: "pointer" }}>{i.title}</Typography>
                                 ))}
                             </Box>
                         }
