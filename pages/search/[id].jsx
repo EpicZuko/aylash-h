@@ -19,10 +19,10 @@ function Index() {
 
     return (
         <Box sx={{ padding: "0px 20px" }}>
-            <Typography sx={{ textAlign: "center", margin: "25px 0" }}>Результат поиска: <span style={{color: "#FFA500"}}> {id}</span></Typography>
+            <Typography sx={{ textAlign: "center", margin: "25px 0" }}>Результат поиска: <span style={{ color: "#FFA500" }}> {id}</span></Typography>
             <Box sx={{ display: "grid", gridTemplateColumns: { lg: "1fr 1fr 1fr 1fr 1fr", md: "1fr 1fr 1fr", sm: "1fr 1fr" }, gap: "15px", }}>
                 {resultSearch.map((i) => (
-                    <Box sx={{ margin: "15px 0", background: "#F6F6F6", }}>
+                    <Box onClick={() => router.push(`/product/${i.id}`)} sx={{ margin: "15px 0", background: "#F6F6F6", }}>
                         <Box sx={{ width: "100%", height: "300px" }}>
                             <Box component="img" sx={{
                                 width: "100%",
