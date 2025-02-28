@@ -2,14 +2,73 @@ import { products } from '@/helpers/constants'
 import { Avatar, Box, Button, Tab, Tabs, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import { loadCartFromLocalStorage, saveCartToLocalStorage } from '@/helpers/CartUtils';
 
 function index() {
     const router = useRouter()
     const { id } = router.query
     const [data, setData] = useState({})
-
+    const [cart, setCart] = useState([]);
+    const [quantity, setQuantity] = useState(1);
+  console.log(cart)
+    useEffect(() => {
+      const savedCart = loadCartFromLocalStorage();
+      setCart(savedCart);
+    }, []);
+  
     
+    const updateCart = (updatedCart) => {
+      setCart(updatedCart);
+      saveCartToLocalStorage(updatedCart);
+    };
+  
+ 
+    const handleAddToCart = () => {
+      const updatedCart = [...cart];
+      const existingItemIndex = updatedCart.findIndex(item => item.id === data.id);
+  
+      if (existingItemIndex === -1) {
+        updatedCart.push({ ...data, quantity: 1 });
+      } else {
+        updatedCart[existingItemIndex].quantity += 1; 
+      }
+  
+      updateCart(updatedCart);
+    };
+  
+    const handleUpdateQuantity = (newQuantity) => {
+      setQuantity(newQuantity);
+      if (Array.isArray(cart)) {
+        const updatedCart = cart.map(item =>
+          item.id === data.id ? { ...item, quantity: newQuantity } : item
+        );
+        updateCart(updatedCart);
+      }
+    };
+  
+    const handleIncrement = () => {
+      setQuantity(prev => {
+        const newQuantity = prev + 1;
+        handleUpdateQuantity(newQuantity); 
+        return newQuantity;
+      });
+    };
+  
+    const handleDecrement = () => {
+      if (quantity > 1) {
+        setQuantity(prev => {
+          const newQuantity = prev - 1;
+          handleUpdateQuantity(newQuantity); 
+          return newQuantity;
+        });
+      }
+    };
+  
 
+    useEffect(() => {
+      saveCartToLocalStorage(cart);
+    }, [cart]);
+//    sdssdsdsd
     useEffect(() => {
         
         const found = products.find((i) => i.id === id)
@@ -226,14 +285,16 @@ function index() {
                                     display: "flex", justifyContent: "center", alignItems: "center", gap: "15px", "img": { cursor: "pointer" },
                                     border: "1px solid #c9c9c9", borderRadius: "8px", padding: "0 15px"
                                 }}>
-                                    <img src="/icons/-.svg" alt="" />
-                                    1
-                                    <img src="/icons/+.svg" alt="" />
+                                    <img src="/icons/-.svg" alt="" onClick={handleDecrement} />
+                                    {quantity}
+                                    <img src="/icons/+.svg" alt="" onClick={handleIncrement} />
                                 </Box>
-                                <Button sx={{ color: "#fff", bgcolor: "#FFA500", fontWeight: "bold", padding: "10px 15px" }}>
+                                <Button onClick={()=> {
+                                    router.push('/cart')
+                                    handleAddToCart()}} sx={{ color: "#fff", bgcolor: "#FFA500", fontWeight: "bold", padding: "10px 15px" }}>
                                     Себетке кошуу
                                 </Button>
-                                <Button sx={{ color: "#fff", bgcolor: "#FFA500", fontWeight: "bold", padding: "10px 15px" }}>
+                                <Button onClick={()=> router.push('/cart')} sx={{ color: "#fff", bgcolor: "#FFA500", fontWeight: "bold", padding: "10px 15px" }}>
                                     Сатып алуу
                                 </Button>
                             </Box>
