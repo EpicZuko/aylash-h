@@ -123,22 +123,22 @@ export default function Card() {
 
   return (
     <CardContainer>
-      <LeftSide>
-        <h2>{leftProduct.title}</h2>
-        <p>{leftProduct.text}</p>
-        <CardButton>Сатып алуу</CardButton>
-        <ProductImageLeft src={leftProduct.image} alt="Selected Product" />
-      </LeftSide>
+        <LeftSide>
+          <h2>{leftProduct.title}</h2>
+          <p>{leftProduct.text}</p>
+          <CardButton>Сатып алуу</CardButton>
+          <ProductImageLeft src={leftProduct.image} alt="Selected Product" />
+        </LeftSide>
 
-      <RightSide>
-        {rightProducts.map((product, index) => (
-          <ProductCard key={index} onClick={() => swapProducts(index)}>
-            <ProductImageRight src={product.image} alt={product.title} />
-            <p>{product.title}</p>
-            <p>{product.text}</p>
-          </ProductCard>
-        ))}
-      </RightSide>
+        <RightSide>
+          {rightProducts.map((product, index) => (
+            <ProductCard key={index} onClick={() => swapProducts(index)}>
+              <ProductImageRight src={product.image} alt={product.title} />
+              <p>{product.title}</p>
+              <p>{product.text}</p>
+            </ProductCard>
+          ))}
+        </RightSide>
     </CardContainer>
   );
 }
