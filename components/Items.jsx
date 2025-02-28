@@ -1,9 +1,12 @@
 import styled from "styled-components";
-import Carousel from "react-elastic-carousel";
 
 const Container = styled.div`
   padding: 20px;
   /* background: #f8f8f8; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin: 0px 0px 0px 10px;
 `;
 
 const MainCard = styled.div`
@@ -97,82 +100,50 @@ export default function Items() {
         <TrendingBanner>Тренд товарлар</TrendingBanner>
       </TrendingBannerContainer>
       <Container>
-        <Carousel itemsToShow={5}>
-          <MainCard>
-            <Image src="/images/image (8).svg" alt="Блендер" />
-            <Title> Керамические сковороды</Title>
-            <Price>
-              450KGS <OldPrice>560KGS</OldPrice>
-            </Price>
-          </MainCard>
-          <Card>
-            <Image src="/images/image (9).svg" alt="Робот-пылесос" />
-            <Title>Робот-пылесос</Title>
-            <Price>
-              450KGS <OldPrice>560KGS</OldPrice>
-            </Price>
-          </Card>
-          <Card>
-            <DiscountTag>Акция</DiscountTag>
-            <Image src="/images/image (10).svg" alt="Стиральная машина" />
-            <Title>Стиральная машина</Title>
-            <Price>
-              450KGS <OldPrice>560KGS</OldPrice>
-            </Price>
-          </Card>
-          <Card>
-            <DiscountTag>Акция</DiscountTag>
-            <Image src="/images/image (11).svg" alt="Тостер" />
-            <Title>Тостер</Title>
-            <Price>
-              450KGS <OldPrice>560KGS</OldPrice>
-            </Price>
-          </Card>
-          <Card>
-            <Image src="/images/image (12).svg" alt="Духовка" />
-            <Title>Духовка</Title>
-            <Price>
-              450KGS <OldPrice>560KGS</OldPrice>
-            </Price>
-          </Card>
-          <MainCard>
-            <Image src="/images/image (8).svg" alt="Блендер" />
-            <Title> Керамические сковороды</Title>
-            <Price>
-              450KGS <OldPrice>560KGS</OldPrice>
-            </Price>
-          </MainCard>
-          <Card>
-            <Image src="/images/image (9).svg" alt="Робот-пылесос" />
-            <Title>Робот-пылесос</Title>
-            <Price>
-              450KGS <OldPrice>560KGS</OldPrice>
-            </Price>
-          </Card>
-          <Card>
-            <DiscountTag>Акция</DiscountTag>
-            <Image src="/images/image (10).svg" alt="Стиральная машина" />
-            <Title>Стиральная машина</Title>
-            <Price>
-              450KGS <OldPrice>560KGS</OldPrice>
-            </Price>
-          </Card>
-          <Card>
-            <DiscountTag>Акция</DiscountTag>
-            <Image src="/images/image (11).svg" alt="Тостер" />
-            <Title>Тостер</Title>
-            <Price>
-              450KGS <OldPrice>560KGS</OldPrice>
-            </Price>
-          </Card>
-          <Card>
-            <Image src="/images/image (12).svg" alt="Духовка" />
-            <Title>Духовка</Title>
-            <Price>
-              450KGS <OldPrice>560KGS</OldPrice>
-            </Price>
-          </Card>
-        </Carousel>
+        <MainCard>
+          <Image src="/images/image (8).svg" alt="Блендер" />
+          <Title> Керамические сковороды</Title>
+          <Price>
+            450KGS <OldPrice>560KGS</OldPrice>
+          </Price>
+        </MainCard>
+        <Card>
+          <Image src="/images/image (9).svg" alt="Робот-пылесос" />
+          <Title>Робот-пылесос</Title>
+          <Price>
+            450KGS <OldPrice>560KGS</OldPrice>
+          </Price>
+        </Card>
+        <Card>
+          <DiscountTag>Акция</DiscountTag>
+          <Image src="/images/image (10).svg" alt="Стиральная машина" />
+          <Title>Стиральная машина</Title>
+          <Price>
+            450KGS <OldPrice>560KGS</OldPrice>
+          </Price>
+        </Card>
+        <Card>
+          <DiscountTag>Акция</DiscountTag>
+          <Image src="/images/image (11).svg" alt="Тостер" />
+          <Title>Тостер</Title>
+          <Price>
+            450KGS <OldPrice>560KGS</OldPrice>
+          </Price>
+        </Card>
+        <Card>
+          <Image src="/images/image (12).svg" alt="Духовка" />
+          <Title>Духовка</Title>
+          <Price>
+            450KGS <OldPrice>560KGS</OldPrice>
+          </Price>
+        </Card>
+        <MainCard>
+          <Image src="/images/image (8).svg" alt="Блендер" />
+          <Title> Керамические сковороды</Title>
+          <Price>
+            450KGS <OldPrice>560KGS</OldPrice>
+          </Price>
+        </MainCard>
       </Container>
     </>
   );
