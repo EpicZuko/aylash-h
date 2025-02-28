@@ -185,7 +185,7 @@ console.log(cartItems)
               <CartCell>
                 <img src={item.image} alt={item.name} width="50" />
               </CartCell>
-              <CartCell>{item.name}</CartCell>
+              <CartCell>{item.title}</CartCell>
               <CartCell>{item.newPrice}KGS</CartCell>
               <CartCell>
                 <QuantityControl>
@@ -204,7 +204,7 @@ console.log(cartItems)
               </CartCell>
             </CartRow>
           ))}
-        </tbody>
+        </tbody> 
       </CartTable>
 
       <OrderSummary>

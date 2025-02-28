@@ -158,7 +158,7 @@ function index() {
     return (
         <Box sx={{ padding: "40px 30px" }}>
 
-            {/* 1 */}
+            {/* 1 */} 
             <Box sx={{ display: "flex" }}>
                 <Box sx={{ minWidth: "200px", marginRight: "20px" }}>
                     <Typography sx={{ fontSize: "12px", fontWeight: "bold", flexWrap: "nowrap", marginTop: "260px" }}>АКЫРКЫ БУЮМДАР</Typography>
