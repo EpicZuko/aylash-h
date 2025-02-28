@@ -74,7 +74,7 @@ export const products = [
     {
         id: "5",
         images: ["/images/Rectangle 7.svg", "/images/Rectangle 8.svg", "/images/Rectangle 9.svg", "/images/Rectangle 7.svg", "/images/Rectangle 8.svg"],
-        title: "Блендер",
+        title: "Тефаль",
         raiting: 5,
         newPrice: 980,
         oldPrice: 1300,
@@ -92,7 +92,7 @@ export const products = [
     {
         id: "6",
         images: ["/images/Rectangle 7.svg", "/images/Rectangle 8.svg", "/images/Rectangle 9.svg", "/images/Rectangle 7.svg", "/images/Rectangle 8.svg"],
-        title: "Блендер",
+        title: "Наушник",
         raiting: 5,
         newPrice: 980,
         oldPrice: 1300,
@@ -110,7 +110,7 @@ export const products = [
     {
         id: "7",
         images: ["/images/Rectangle 7.svg", "/images/Rectangle 8.svg", "/images/Rectangle 9.svg", "/images/Rectangle 7.svg", "/images/Rectangle 8.svg"],
-        title: "Блендер",
+        title: "Карта",
         raiting: 5,
         newPrice: 980,
         oldPrice: 1300,
@@ -128,7 +128,7 @@ export const products = [
     {
         id: "8",
         images: ["/images/Rectangle 7.svg", "/images/Rectangle 8.svg", "/images/Rectangle 9.svg", "/images/Rectangle 7.svg", "/images/Rectangle 8.svg"],
-        title: "Блендер",
+        title: "Ноутбук",
         raiting: 5,
         newPrice: 980,
         oldPrice: 1300,
@@ -146,7 +146,7 @@ export const products = [
     {
         id: "9",
         images: ["/images/Rectangle 7.svg", "/images/Rectangle 8.svg", "/images/Rectangle 9.svg", "/images/Rectangle 7.svg", "/images/Rectangle 8.svg"],
-        title: "Блендер",
+        title: "Телефон",
         raiting: 5,
         newPrice: 980,
         oldPrice: 1300,
@@ -164,7 +164,7 @@ export const products = [
     {
         id: "10",
         images: ["/images/Rectangle 7.svg", "/images/Rectangle 8.svg", "/images/Rectangle 9.svg", "/images/Rectangle 7.svg", "/images/Rectangle 8.svg"],
-        title: "Блендер",
+        title: "Редми",
         raiting: 5,
         newPrice: 980,
         oldPrice: 1300,
