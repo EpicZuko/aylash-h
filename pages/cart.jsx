@@ -43,7 +43,7 @@ const Button = styled.button`
 
 const OrderSummary = styled.div`
   width: 293px;
-  height: 414px;
+  height: auto;
   border: 1px solid #ddd;
   padding: 20px;
   border-radius: 10px;
@@ -97,8 +97,9 @@ const OrderSummaryShipping = styled.p`
   font-family: Montserrat;
   font-weight: 700;
   font-size: 18px;
-  line-height: 12.17px;
+  line-height: 20.17px;
   padding: 0px 0px 12px 0px;
+  height: auto;
 `;
 const OrderSummaryTotal = styled.p`
   font-family: Montserrat;
@@ -114,77 +115,115 @@ const OrderSummaryFullTravel = styled.p`
   line-height: 14.63px;
   padding: 30px 0px 0px 0px;
 `;
+
 export default function Cart() {
-  const [quantity, setQuantity] = useState(1);
-  const price = 245;
+  const [cartItems, setCartItems] = useState([
+    {
+      id: 1,
+      name: "Керамикалык вазалар",
+      price: 245,
+      quantity: 1,
+      image: "/images/Rectangle 118.svg",
+    },
+    {
+      id: 2,
+      name: "Фарфор чөйчөк",
+      price: 300,
+      quantity: 2,
+      image: "/images/Rectangle 118.svg",
+    },
+  ]);
+
   const shipping = 150;
-  const total = price * quantity + shipping;
+
+  const handleQuantityChange = (id, delta) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
+          : item
+      )
+    );
+  };
+
+  const handleRemoveItem = (id) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const grandTotal = totalPrice + shipping;
 
   return (
     <Container>
-      <div>
-        <CartTable>
-          <thead>
-            <tr>
-              <CartHeader>ФОТО</CartHeader>
-              <CartHeader>ПРОДУКТ АТАЛЫШЫ</CartHeader>
-              <CartHeader>БААСЫ</CartHeader>
-              <CartHeader>ЖАЛПЫ САНЫ</CartHeader>
-              <CartHeader>ЖАЛПЫ СУММА</CartHeader>
-              <CartHeader>ОЧУРУУ</CartHeader>
-            </tr>
-          </thead>
-          <tbody>
-            <CartRow>
+      <CartTable>
+        <thead>
+          <tr>
+            <CartHeader>ФОТО</CartHeader>
+            <CartHeader>ПРОДУКТ АТАЛЫШЫ</CartHeader>
+            <CartHeader>БААСЫ</CartHeader>
+            <CartHeader>ЖАЛПЫ САНЫ</CartHeader>
+            <CartHeader>ЖАЛПЫ СУММА</CartHeader>
+            <CartHeader>ОЧУРУУ</CartHeader>
+          </tr>
+        </thead>
+        <tbody>
+          {cartItems.map((item) => (
+            <CartRow key={item.id}>
               <CartCell>
-                <img
-                  src="/images/Rectangle 118.svg"
-                  alt="Керамикалык вазалар"
-                  width="50"
-                />
+                <img src={item.image} alt={item.name} width="50" />
               </CartCell>
-              <CartCell>Керамикалык вазалар</CartCell>
-              <CartCell>{price}KGS</CartCell>
+              <CartCell>{item.name}</CartCell>
+              <CartCell>{item.price}KGS</CartCell>
               <CartCell>
                 <QuantityControl>
-                  <Button
-                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  >
+                  <Button onClick={() => handleQuantityChange(item.id, -1)}>
                     -
                   </Button>
-                  {quantity}
-                  <Button onClick={() => setQuantity((q) => q + 1)}>+</Button>
+                  {item.quantity}
+                  <Button onClick={() => handleQuantityChange(item.id, 1)}>
+                    +
+                  </Button>
                 </QuantityControl>
               </CartCell>
-              <CartCell>{price * quantity}KGS</CartCell>
+              <CartCell>{item.price * item.quantity}KGS</CartCell>
               <CartCell>
-                <Button>✖</Button>
+                <Button onClick={() => handleRemoveItem(item.id)}>✖</Button>
               </CartCell>
             </CartRow>
-          </tbody>
-        </CartTable>
-      </div>
+          ))}
+        </tbody>
+      </CartTable>
+
       <OrderSummary>
         <OrderH1>Буйрутма</OrderH1>
-        <div>
-          <OrderLabelAddress htmlFor="">ФИО:</OrderLabelAddress>
-          <InputFamily type="text" placeholder="(клиент жазуу керек)" />
-        </div>
-        <div>
-          <OrderLabelAddress htmlFor="">Дарек:</OrderLabelAddress>
-          <InputFamily type="text" placeholder="(клиент жазуу керек)" />
-        </div>
-        <OrderSummaryPrice>Сумма: {price * quantity}KGS</OrderSummaryPrice>
+        <form>
+          <div>
+            <OrderLabelAddress htmlFor="fullname">ФИО:</OrderLabelAddress>
+            <InputFamily
+              id="fullname"
+              type="text"
+              placeholder="(клиент жазуу керек)"
+            />
+          </div>
+          <div>
+            <OrderLabelAddress htmlFor="address">Дарек:</OrderLabelAddress>
+            <InputFamily
+              id="address"
+              type="text"
+              placeholder="(клиент жазуу керек)"
+            />
+          </div>
+        </form>
+        <OrderSummaryPrice>Сумма: {totalPrice}KGS</OrderSummaryPrice>
         <OrderSummaryShipping>
           Жеткируу кызматы: {shipping}KGS
         </OrderSummaryShipping>
         <OrderSummaryTotal>
-          <strong>Жалпы сумма: {total}KGS</strong>
+          <strong>Жалпы сумма: {grandTotal}KGS</strong>
         </OrderSummaryTotal>
-        <OrderSummaryFullTravel>
-          ТОЛОМ ЖУРУЗУУ: <img src="/images/image 21.svg" alt="" />{" "}
-          <img src="/images/image 23.svg" alt="" />
-        </OrderSummaryFullTravel>
         <OrderButton>Буйруктаны каттоо</OrderButton>
       </OrderSummary>
     </Container>

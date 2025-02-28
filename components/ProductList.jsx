@@ -100,6 +100,7 @@ const TrendingBannerContainer = styled.div`
   border-left: 0px;
   border-radius: 5px;
 `;
+
 export default function TrendingProducts() {
   return (
     <>

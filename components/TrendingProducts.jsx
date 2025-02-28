@@ -1,3 +1,5 @@
+import { products } from "@/helpers/constants";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -80,85 +82,26 @@ const TrendingBanner = styled.div`
 `;
 
 export default function TrendingProducts() {
+  const router = useRouter();
   return (
     <>
       <TrendingBannerContainer>
         <TrendingBanner>Тренд буюмдар</TrendingBanner>
       </TrendingBannerContainer>
       <Container>
-        <Card>
-          <Image src="/images/Rectangle 30.svg" alt="Блендер" />
-          <Title>Блендер - ТЕХНОМИР</Title>
-          <Price>
-            450KGS <OldPrice>560KGS</OldPrice>
-          </Price>
-        </Card>
-        <Card>
-          <Image src="/images/Rectangle 32.svg" alt="Робот-пылесос" />
-          <Title>Робот-пылесос</Title>
-          <Price>
-            450KGS <OldPrice>560KGS</OldPrice>
-          </Price>
-        </Card>
-        <Card>
-          <DiscountTag>Акция</DiscountTag>
-          <Image src="/images/Rectangle 34.svg" alt="Стиральная машина" />
-          <Title>Стиральная машина</Title>
-          <Price>
-            450KGS <OldPrice>560KGS</OldPrice>
-          </Price>
-        </Card>
-        <Card>
-          <DiscountTag>Акция</DiscountTag>
-          <Image src="/images/Rectangle 36.svg" alt="Тостер" />
-          <Title>Тостер</Title>
-          <Price>
-            450KGS <OldPrice>560KGS</OldPrice>
-          </Price>
-        </Card>
-        <Card>
-          <Image src="/images/Rectangle 38.svg" alt="Духовка" />
-          <Title>Духовка</Title>
-          <Price>
-            450KGS <OldPrice>560KGS</OldPrice>
-          </Price>
-        </Card>
-        <Card>
-          <Image src="/images/Rectangle 44.svg" alt="Кофейные зерна" />
-          <Title>Кофейные зерна</Title>
-          <Price>
-            450KGS <OldPrice>560KGS</OldPrice>
-          </Price>
-        </Card>
-        <Card>
-          <DiscountTag>Акция</DiscountTag>
-          <Image src="/images/Rectangle 45.svg" alt="Керамическая сковорода" />
-          <Title>Керамическая сковорода</Title>
-          <Price>
-            450KGS <OldPrice>560KGS</OldPrice>
-          </Price>
-        </Card>
-        <Card>
-          <Image src="/images/Rectangle 46.svg" alt="Кухня" />
-          <Title>Кухня</Title>
-          <Price>
-            450KGS <OldPrice>560KGS</OldPrice>
-          </Price>
-        </Card>
-        <Card>
-          <Image src="/images/Rectangle 47.svg" alt="Диван" />
-          <Title>Диван</Title>
-          <Price>
-            450KGS <OldPrice>560KGS</OldPrice>
-          </Price>
-        </Card>
-        <Card>
-          <Image src="/images/Rectangle 48.svg" alt="Шкаф" />
-          <Title>Шкаф</Title>
-          <Price>
-            450KGS <OldPrice>560KGS</OldPrice>
-          </Price>
-        </Card>
+        {products.map((product) => (
+          <Card
+            key={product.id}
+            onClick={() => router.push(`/product/${product.id}`)}
+          >
+            {product.discount && <DiscountTag>Акция</DiscountTag>}
+            <Image src={product.image} alt={product.title} />
+            <Title>{product.title}</Title>
+            <Price>
+              {product.newPrice}KGS <OldPrice>{product.oldPrice}KGS</OldPrice>
+            </Price>
+          </Card>
+        ))}
       </Container>
     </>
   );
