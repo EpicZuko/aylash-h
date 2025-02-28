@@ -2,7 +2,10 @@ import Head from "next/head";
 import { Montserrat } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Card from "@/components/Card";
-
+import DiscountProducts from "@/components/DiscountProducts";
+import TrendingProducts from "@/components/TrendingProducts";
+import ProductList from "@/components/ProductList";
+import Items from "@/components/Items";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -19,11 +22,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div
-        className={`${styles.page} ${montserrat.variable}`}
-      >
+      <div className={`${styles.page} ${montserrat.variable}`}>
         <main className={styles.main}>
-          <Card/>
+          <Card />
+          <DiscountProducts />
+          <TrendingProducts />
+          <ProductList />
+          <Items />
         </main>
       </div>
     </>

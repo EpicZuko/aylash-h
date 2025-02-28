@@ -6,6 +6,7 @@ const CardContainer = styled.div`
   display: flex;
   gap: 4rem;
   height: 525px;
+  margin: 30px 0px 30px 0px;
 `;
 
 const LeftSide = styled.div`
