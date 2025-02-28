@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -117,22 +117,17 @@ const OrderSummaryFullTravel = styled.p`
 `;
 
 export default function Cart() {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Керамикалык вазалар",
-      price: 245,
-      quantity: 1,
-      image: "/images/Rectangle 118.svg",
-    },
-    {
-      id: 2,
-      name: "Фарфор чөйчөк",
-      price: 300,
-      quantity: 2,
-      image: "/images/Rectangle 118.svg",
-    },
-  ]);
+  const [cartItems, setCartItems] = useState([]);
+console.log(cartItems)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Проверяем, что код выполняется на клиенте (в браузере)
+      const savedCart = localStorage.getItem("cart");
+      if (savedCart) {
+        setCartItems(JSON.parse(savedCart)); // Преобразуем строку в объект и обновляем состояние
+      }
+    }
+  }, []);
 
   const shipping = 150;
 
@@ -150,8 +145,23 @@ export default function Cart() {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
+  const handleAddItem = (newItem) => {
+    setCartItems((prevItems) => {
+      const itemExists = prevItems.find((item) => item.id === newItem.id);
+      if (itemExists) {
+        return prevItems.map((item) =>
+          item.id === newItem.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prevItems, { ...newItem, quantity: 1 }];
+      }
+    });
+  };
+
   const totalPrice = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + item.newPrice * item.quantity,
     0
   );
   const grandTotal = totalPrice + shipping;
@@ -176,7 +186,7 @@ export default function Cart() {
                 <img src={item.image} alt={item.name} width="50" />
               </CartCell>
               <CartCell>{item.name}</CartCell>
-              <CartCell>{item.price}KGS</CartCell>
+              <CartCell>{item.newPrice}KGS</CartCell>
               <CartCell>
                 <QuantityControl>
                   <Button onClick={() => handleQuantityChange(item.id, -1)}>
@@ -188,7 +198,7 @@ export default function Cart() {
                   </Button>
                 </QuantityControl>
               </CartCell>
-              <CartCell>{item.price * item.quantity}KGS</CartCell>
+              <CartCell>{item.newPrice * item.quantity}KGS</CartCell>
               <CartCell>
                 <Button onClick={() => handleRemoveItem(item.id)}>✖</Button>
               </CartCell>

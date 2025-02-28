@@ -11,10 +11,11 @@ const Container = styled.div`
 `;
 
 const Card = styled.div`
-  /* background: rgba(217, 217, 217, 0.25); */
-  /* border-radius: 10px; */
+  background: rgba(217, 217, 217, 0.25);
+  border-radius: 10px;
   /* padding: 15px; */
   width: 250px;
+  height: 280px;
   position: relative;
   cursor: pointer;
   transition:
@@ -28,7 +29,9 @@ const Card = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  /* border-radius: 10px; */
+  height: 73%;
+  object-fit: cover;
+  border-radius: 10px;
 `;
 
 const DiscountTag = styled.span`
@@ -95,7 +98,7 @@ export default function TrendingProducts() {
             onClick={() => router.push(`/product/${product.id}`)}
           >
             {product.discount && <DiscountTag>Акция</DiscountTag>}
-            <Image src={product.image} alt={product.title} />
+            <Image src={product.images[0]} alt={product.title} />
             <Title>{product.title}</Title>
             <Price>
               {product.newPrice}KGS <OldPrice>{product.oldPrice}KGS</OldPrice>
