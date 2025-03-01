@@ -6,6 +6,9 @@ const Container = styled.div`
   display: flex;
   gap: 20px;
   padding: 20px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
   /* background: #f8f8f8; */
 `;
 
@@ -19,8 +22,11 @@ const Card = styled.div`
 `;
 
 const Image = styled.img`
-  width: 100%;
+  /* width: 100%; */
   border-radius: 10px;
+  @media (max-width: 768px) {
+    /* width: 100%; */
+  }
 `;
 
 const DiscountTag = styled.span`
@@ -131,6 +137,10 @@ const Banner = styled.div`
   margin: 30px 13px 75px 20px;
   border-radius: 5px;
   justify-content: space-between;
+  @media (max-width: 769px) {
+    padding: 10px 10px 10px 0px;
+    margin: 50px 13px 55px 20px;
+  }
 `;
 
 const BannerLabel = styled.div`
@@ -147,6 +157,9 @@ const BannerText = styled.p`
   margin: 0;
   flex-grow: 1;
   text-align: center;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const BannerButton = styled.button`
@@ -157,6 +170,10 @@ const BannerButton = styled.button`
   border-radius: 5px;
   font-size: 12px;
   cursor: pointer;
+  @media (max-width: 768px) {
+    font-size: 8px;
+    padding: 8px 10px;
+  }
 `;
 
 const DailyDiscountsContainer = styled.div`
@@ -165,6 +182,9 @@ const DailyDiscountsContainer = styled.div`
   border-top: 0px;
   border-right: 0px;
   border-left: 0px;
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 const DailyDiscounts = styled.h1`
   width: 200px;
@@ -191,7 +211,17 @@ const PercentageButtonContainer = styled.div`
   position: absolute;
   top: 100px;
   left: 423px;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    /* top: 50px; */
+    left: 20%;
+    transform: translateX(-50%);
+  }
 `;
+
 const PercentageButton = styled.button`
   width: 82px;
   height: 82px;
@@ -205,7 +235,14 @@ const PercentageButton = styled.button`
   background-color: rgba(255, 165, 0, 1);
   color: rgba(255, 255, 255, 1);
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
 `;
+
 const MinimalistText = styled.p`
   font-family: Montserrat;
   font-weight: 600;
@@ -214,8 +251,16 @@ const MinimalistText = styled.p`
   position: absolute;
   left: 578px;
   top: 99px;
-  /* text-align: center; */
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    left: 50%;
+    /* top: 140px; */
+    transform: translateX(-50%);
+    text-align: center;
+  }
 `;
+
 const BuyInButton = styled.button`
   width: 96px;
   height: 24px;
@@ -231,16 +276,35 @@ const BuyInButton = styled.button`
   top: 127px;
   left: 790px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    /* top: 180px; */
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
+
 const ImagesAction = styled.img`
   width: 1496px;
   height: 196px;
   margin: 64px 0px 75px 0px;
   border-radius: 4px;
+
+  @media (max-width: 768px) {
+    width: 95%;
+    height: auto;
+    margin: 64px 20px 75px 20px;
+  }
 `;
+
 const PercentContainer = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 `;
+
 export default function DiscountProducts() {
   const deadline = new Date();
   deadline.setDate(deadline.getDate() + 10);

@@ -1,23 +1,35 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import { Modal, Box, Typography, Button } from "@mui/material";
 
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 20px;
   padding: 52px 70px 55px 70px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const CartTable = styled.table`
   /* width: 70%; */
   width: 982px;
   border-collapse: collapse;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const CartHeader = styled.th`
   text-align: left;
   padding: 10px;
   border-bottom: 2px solid #ddd;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const CartRow = styled.tr`
@@ -34,12 +46,12 @@ const QuantityControl = styled.div`
   gap: 5px;
 `;
 
-const Button = styled.button`
-  background: #ddd;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-`;
+// const Button = styled.button`
+//   background: #ddd;
+//   border: none;
+//   padding: 5px 10px;
+//   cursor: pointer;
+// `;
 
 const OrderSummary = styled.div`
   width: 293px;
@@ -85,6 +97,14 @@ const OrderButton = styled.button`
   height: 33px;
   cursor: pointer;
   margin-top: 10px;
+  &:hover {
+    background-color: #388e3c;
+  }
+  &:disabled {
+    background-color: #9e9e9e;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 `;
 const OrderSummaryPrice = styled.p`
   font-family: Montserrat;
@@ -118,7 +138,31 @@ const OrderSummaryFullTravel = styled.p`
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
-console.log(cartItems)
+  const [formData, setFormData] = useState({ fullname: "", address: "" });
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  console.log(cartItems);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!formData.fullname || !formData.address) {
+      setOpenModal(true);
+      return;
+    }
+
+    console.log("Форма жиберилди:", formData, cartItems);
+
+    setOpenSnackbar(true);
+    setFormData({ fullname: "", address: "" });
+    setCartItems([]);
+    localStorage.removeItem("cart");
+  };
+  // baskets start
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Проверяем, что код выполняется на клиенте (в браузере)
@@ -204,18 +248,20 @@ console.log(cartItems)
               </CartCell>
             </CartRow>
           ))}
-        </tbody> 
+        </tbody>
       </CartTable>
 
       <OrderSummary>
         <OrderH1>Буйрутма</OrderH1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <OrderLabelAddress htmlFor="fullname">ФИО:</OrderLabelAddress>
             <InputFamily
               id="fullname"
               type="text"
               placeholder="(клиент жазуу керек)"
+              value={formData.fullname}
+              onChange={handleChange}
             />
           </div>
           <div>
@@ -224,17 +270,84 @@ console.log(cartItems)
               id="address"
               type="text"
               placeholder="(клиент жазуу керек)"
+              value={formData.address}
+              onChange={handleChange}
             />
           </div>
+          <OrderSummaryPrice>Сумма: {totalPrice}KGS</OrderSummaryPrice>
+          <OrderSummaryShipping>
+            Жеткируу кызматы: {shipping}KGS
+          </OrderSummaryShipping>
+          <OrderSummaryTotal>
+            <strong>Жалпы сумма: {grandTotal}KGS</strong>
+          </OrderSummaryTotal>
+          <OrderButton type="submit" disabled={cartItems.length === 0}>
+            Буйруктаны каттоо
+          </OrderButton>
         </form>
-        <OrderSummaryPrice>Сумма: {totalPrice}KGS</OrderSummaryPrice>
-        <OrderSummaryShipping>
-          Жеткируу кызматы: {shipping}KGS
-        </OrderSummaryShipping>
-        <OrderSummaryTotal>
-          <strong>Жалпы сумма: {grandTotal}KGS</strong>
-        </OrderSummaryTotal>
-        <OrderButton>Буйруктаны каттоо</OrderButton>
+        <Modal open={openModal} onClose={() => setOpenModal(false)}>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "30%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 300,
+              bgcolor: "white",
+              boxShadow: 24,
+              p: 4,
+              borderRadius: 2,
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="h6" component="h2">
+              Эскертүү!
+            </Typography>
+            <Typography sx={{ mt: 2 }}>
+              Бардык талааларды толтуруңуз!
+            </Typography>
+            <Button
+              variant="contained"
+              sx={{ mt: 3 }}
+              onClick={() => setOpenModal(false)}
+            >
+              Ок
+            </Button>
+          </Box>
+        </Modal>
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={3000}
+          onClose={() => setOpenSnackbar(false)}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          sx={{
+            "& .MuiSnackbarContent-root": {
+              backgroundColor: "#2E7D32", // Темно-зеленый цвет
+              color: "#fff",
+              fontSize: "16px",
+              fontWeight: "bold",
+              borderRadius: "8px",
+              boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.2)",
+              backdropFilter: "blur(8px)",
+              animation: "fadeIn 0.3s ease-in-out",
+            },
+          }}
+        >
+          <Alert
+            onClose={() => setOpenSnackbar(false)}
+            severity="success"
+            sx={{
+              backgroundColor: "#4CAF50", // Зеленый цвет
+              color: "white",
+              fontSize: "14px",
+              fontWeight: "500",
+              borderRadius: "8px",
+              padding: "10px 20px",
+            }}
+          >
+            Буйрутма ийгиликтүү жиберилди!
+          </Alert>
+        </Snackbar>
       </OrderSummary>
     </Container>
   );

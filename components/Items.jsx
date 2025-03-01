@@ -5,8 +5,12 @@ const Container = styled.div`
   /* background: #f8f8f8; */
   display: flex;
   flex-wrap: wrap;
-  gap: 50px;
-  margin: 0px 0px 0px 10px;
+  gap: 3%;
+  padding: 20px 0px 30px 30px;
+  width: 100%;
+  @media (max-width: 768px) {
+    gap: 50px;
+  }
 `;
 
 const MainCard = styled.div`
@@ -82,6 +86,9 @@ const TrendingBannerContainer = styled.div`
   border-right: 0px;
   border-left: 0px;
   border-radius: 5px;
+  @media (max-width: 768px) {
+    width: 92%;
+  }
 `;
 const TrendingBanner = styled.div`
   background: #333;

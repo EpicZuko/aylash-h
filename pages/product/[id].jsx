@@ -46,23 +46,23 @@ function index() {
       }
     };
   
-    const handleIncrement = () => {
-      setQuantity(prev => {
-        const newQuantity = prev + 1;
-        handleUpdateQuantity(newQuantity); 
-        return newQuantity;
-      });
-    };
+    // const handleIncrement = () => {
+    //   setQuantity(prev => {
+    //     const newQuantity = prev + 1;
+    //     handleUpdateQuantity(newQuantity); 
+    //     return newQuantity;
+    //   });
+    // };
   
-    const handleDecrement = () => {
-      if (quantity > 1) {
-        setQuantity(prev => {
-          const newQuantity = prev - 1;
-          handleUpdateQuantity(newQuantity); 
-          return newQuantity;
-        });
-      }
-    };
+    // const handleDecrement = () => {
+    //   if (quantity > 1) {
+    //     setQuantity(prev => {
+    //       const newQuantity = prev - 1;
+    //       handleUpdateQuantity(newQuantity); 
+    //       return newQuantity;
+    //     });
+    //   }
+    // };
   
 
     useEffect(() => {
@@ -285,9 +285,9 @@ function index() {
                                     display: "flex", justifyContent: "center", alignItems: "center", gap: "15px", "img": { cursor: "pointer" },
                                     border: "1px solid #c9c9c9", borderRadius: "8px", padding: "0 15px"
                                 }}>
-                                    <img src="/icons/-.svg" alt="" onClick={handleDecrement} />
+                                    {/* <img src="/icons/-.svg" alt="" onClick={handleDecrement} /> */}
                                     {quantity}
-                                    <img src="/icons/+.svg" alt="" onClick={handleIncrement} />
+                                    {/* <img src="/icons/+.svg" alt="" onClick={handleIncrement} /> */}
                                 </Box>
                                 <Button onClick={()=> {
                                     router.push('/cart')
