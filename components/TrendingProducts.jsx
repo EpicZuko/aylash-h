@@ -8,6 +8,10 @@ const Container = styled.div`
   gap: 50px;
   padding: 20px;
   justify-content: center;
+  @media (max-width: 768px) {
+    gap: 50px;
+    width: 100%;
+  }
 `;
 
 const Card = styled.div`
@@ -24,6 +28,9 @@ const Card = styled.div`
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transform: scale(1.02);
+  }
+  @media (max-width: 768px) {
+    width: 200px;
   }
 `;
 
@@ -73,6 +80,9 @@ const TrendingBannerContainer = styled.div`
   border-right: 0px;
   border-left: 0px;
   border-radius: 5px;
+  @media (max-width: 768px) {
+    width: 92%;
+  }
 `;
 const TrendingBanner = styled.div`
   background: #333;

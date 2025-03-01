@@ -3,10 +3,13 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 44px;
+  gap: 160px;
   padding: 20px;
   /* background: #f8f8f8; */
   justify-content: center;
+  @media (max-width: 768px){
+    gap: 44px;
+  }
 `;
 
 const MainCard = styled.div`
@@ -22,6 +25,9 @@ const MainCard = styled.div`
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transform: scale(1.02);
+  }
+  @media (max-width: 768px) {
+    width: 95%;
   }
 `;
 
@@ -90,6 +96,11 @@ const CardContainer = styled.div`
   gap: 40px;
   width: 800px;
   flex-wrap: wrap;
+  @media (max-width: 768px) {
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+  }
 `;
 const TrendingBannerContainer = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -99,12 +110,15 @@ const TrendingBannerContainer = styled.div`
   border-right: 0px;
   border-left: 0px;
   border-radius: 5px;
+  @media (max-width: 768px) {
+    width: 91%;
+  }
 `;
 
 export default function TrendingProducts() {
   return (
     <>
-    <TrendingBannerContainer>
+      <TrendingBannerContainer>
         <TrendingBanner>Тренд идиштер</TrendingBanner>
       </TrendingBannerContainer>
       <Container>

@@ -5,13 +5,21 @@ import styled from "styled-components";
 const CardContainer = styled.div`
   display: flex;
   gap: 4rem;
-  height: 525px;
-  margin: 30px 0px 30px 0px;
+  height: auto;
+  width: 99%;
+  margin: 30px 0px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    gap: 2rem;
+  }
 `;
 
 const LeftSide = styled.div`
   position: relative;
-  width: 1106px;
+  width: 100%;
   height: 525px;
   cursor: pointer;
   padding: 1rem;
@@ -36,6 +44,19 @@ const LeftSide = styled.div`
     font-size: 24px;
     font-weight: bold;
   }
+
+  @media (max-width: 768px) {
+    position: relative;
+    width: 100%;
+    height: auto;
+    left: 0;
+    padding: 0.5rem;
+    h2,
+    p {
+      position: absolute;
+      text-align: center;
+    }
+  }
 `;
 
 const RightSide = styled.div`
@@ -44,6 +65,13 @@ const RightSide = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6rem;
+
+  @media (max-width: 768px) {
+    width: 96%;
+    height: auto;
+    gap: 2rem;
+    align-items: center;
+  }
 `;
 
 const CardButton = styled.button`
@@ -61,6 +89,11 @@ const CardButton = styled.button`
   &:hover {
     background-color: #d97706;
   }
+
+  @media (max-width: 768px) {
+    position: absolute;
+    margin-top: 1rem;
+  }
 `;
 
 const ProductCard = styled.div`
@@ -77,19 +110,37 @@ const ProductCard = styled.div`
     align-self: flex-start;
     margin-left: 10px;
   }
+
+  @media (max-width: 768px) {
+    align-items: left;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+  }
 `;
 
 const ProductImageLeft = styled.img`
-  width: 1106px;
+  width: 100%;
   height: 525px;
   border-radius: 8px;
   object-fit: cover;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 const ProductImageRight = styled.img`
   width: 337px;
   height: 183px;
   border-radius: 8px;
   object-fit: cover;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    object-fit: cover;
+    height: 183px;
+  }
 `;
 
 export default function Card() {
@@ -123,7 +174,8 @@ export default function Card() {
   };
 
   return (
-    <CardContainer>
+    <div>
+      <CardContainer>
         <LeftSide>
           <h2>{leftProduct.title}</h2>
           <p>{leftProduct.text}</p>
@@ -140,6 +192,7 @@ export default function Card() {
             </ProductCard>
           ))}
         </RightSide>
-    </CardContainer>
+      </CardContainer>
+    </div>
   );
 }
