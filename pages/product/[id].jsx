@@ -24,26 +24,27 @@ function index() {
   
  
     const handleAddToCart = () => {
-      const updatedCart = [...cart];
-      const existingItemIndex = updatedCart.findIndex(item => item.id === data.id);
-  
-      if (existingItemIndex === -1) {
-        updatedCart.push({ ...data, quantity: 1 });
-      } else {
-        updatedCart[existingItemIndex].quantity += 1; 
-      }
-  
-      updateCart(updatedCart);
+        const updatedCart = [...cart];
+        const existingItemIndex = updatedCart.findIndex(item => item.id === data.id);
+    
+        if (existingItemIndex === -1) {
+            updatedCart.push({ ...data, quantity: quantity }); // Используем quantity из состояния
+        } else {
+            updatedCart[existingItemIndex].quantity += quantity; // Добавляем quantity в существующий товар
+        }
+    
+        updateCart(updatedCart); // Обновляем корзину
     };
-  
+    
     const handleUpdateQuantity = (newQuantity) => {
-      setQuantity(newQuantity);
-      if (Array.isArray(cart)) {
-        const updatedCart = cart.map(item =>
-          item.id === data.id ? { ...item, quantity: newQuantity } : item
-        );
-        updateCart(updatedCart);
-      }
+        setQuantity(newQuantity); // Обновляем локальное состояние quantity
+    
+        if (Array.isArray(cart)) {
+            const updatedCart = cart.map(item =>
+                item.id === data.id ? { ...item, quantity: newQuantity } : item // Обновляем quantity в корзине
+            );
+            updateCart(updatedCart); // Обновляем корзину
+        }
     };
   
     // const handleIncrement = () => {

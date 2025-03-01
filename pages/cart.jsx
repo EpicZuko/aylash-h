@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { Modal, Box, Typography, Button } from "@mui/material";
+import { loadCartFromLocalStorage, saveCartToLocalStorage } from "@/helpers/CartUtils";
 
 const Container = styled.div`
   display: flex;
@@ -137,10 +138,11 @@ const OrderSummaryFullTravel = styled.p`
 `;
 
 export default function Cart() {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(() => loadCartFromLocalStorage());
   const [formData, setFormData] = useState({ fullname: "", address: "" });
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   console.log(cartItems);
 
   const handleChange = (e) => {
@@ -163,46 +165,35 @@ export default function Cart() {
     localStorage.removeItem("cart");
   };
   // baskets start
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      // Проверяем, что код выполняется на клиенте (в браузере)
-      const savedCart = localStorage.getItem("cart");
-      if (savedCart) {
-        setCartItems(JSON.parse(savedCart)); // Преобразуем строку в объект и обновляем состояние
-      }
-    }
-  }, []);
 
   const shipping = 150;
 
   const handleQuantityChange = (id, delta) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
+    setCartItems((prevItems) => {
+      const updatedCart = prevItems.map((item) =>
         item.id === id
           ? { ...item, quantity: Math.max(1, item.quantity + delta) }
           : item
-      )
-    );
+      );
+
+      saveCartToLocalStorage(updatedCart); // Сохраняем в localStorage
+      return updatedCart;
+    });
   };
 
   const handleRemoveItem = (id) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
-  const handleAddItem = (newItem) => {
-    setCartItems((prevItems) => {
-      const itemExists = prevItems.find((item) => item.id === newItem.id);
-      if (itemExists) {
-        return prevItems.map((item) =>
-          item.id === newItem.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        return [...prevItems, { ...newItem, quantity: 1 }];
-      }
-    });
-  };
+  useEffect(() => {
+    setIsClient(true); // После монтирования компонента меняем флаг
+    const savedCart = loadCartFromLocalStorage();
+    setCartItems(savedCart);
+  }, []);
+
+  if (!isClient) {
+    return null; // Избегаем рендера на сервере
+  } // Следит за изменениями cartItems
 
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.newPrice * item.quantity,
