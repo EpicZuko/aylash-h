@@ -67,12 +67,12 @@ function Header() {
             </Box>
             <Box sx={{ display: "flex", justifyContent: "space-between", padding: "10px 30px" }}>
                 <img onClick={() => navigateNamdle("/")} src={"/icons/mainlogo.svg"} />
-                <Box sx={{ display: "flex", alignItems: "center", gap: "20px", minWidth: { md: "300px", lg: "800px" } }}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: { lg: "20px", md: "15px", sm: "10px" }, minWidth: { md: "300px", lg: "800px" } }}>
                     <Typography onClick={() => navigateNamdle("/")} sx={{ cursor: "pointer" }}>БАШКЫ БЕТ</Typography>
                     <Typography sx={{ cursor: "pointer" }}>ДУКОН</Typography>
                     <Typography sx={{ cursor: "pointer" }}>АКЦИЯ</Typography>
                 </Box>
-                <Box sx={{ display: "flex", alignItems: "center", gap: "25px" }}>
+                <Box sx={{ display: {lg:"flex", md: "block"}, alignItems: "center", gap: "25px" }}>
                     <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                         <img src={"/icons/auth.svg"} alt='auth' />
                         <Typography sx={{ fontSize: "14px", fontWeight: "200", cursor: "pointer" }}>Кируу же катталуу</Typography>
@@ -90,7 +90,7 @@ function Header() {
                     display: "flex", alignItems: "center", justifyContent: 'center', gap: "10px", padding: "10px 20px"
                 }}>
                     <img src="/icons/burger.svg" alt="burger" />
-                    <Typography sx={{ color: "#fff" }}>БОЛУМДОР</Typography>
+                    <Typography sx={{ color: "#fff", display: {lg: "block", md: "none", sm: "none", xs: "none"}}}>БОЛУМДОР</Typography>
                 </Box>
                 <Box sx={{ height: "40px", minWidth: { md: "300px", lg: "800px" }, display: "flex", position: "relative" }}>
                     <Box value={searchValue} onChange={getSearchValueHandle} component="input" placeholder='Издоо ...' sx={{
@@ -115,7 +115,7 @@ function Header() {
                         }
                     </Box>}
                 </Box>
-                <Box sx={{ display: "flex", alignItems: "center", gap: "25px" }}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: {lg: "25px", sm: "10px"} }}>
                     <Box onClick={() => isActiveBtn("like")} sx={{
                         background: isActive === "like" && "#3F444A", borderRadius: "100px", display: "flex", justifyContent: "center", alignItems: "center",
                         width: "40px", height: "40px", cursor: "pointer"

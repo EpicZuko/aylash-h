@@ -10,35 +10,35 @@ function index() {
     const [data, setData] = useState({})
     const [cart, setCart] = useState([]);
     const [quantity, setQuantity] = useState(1);
-  console.log(cart)
+    console.log(cart)
     useEffect(() => {
-      const savedCart = loadCartFromLocalStorage();
-      setCart(savedCart);
+        const savedCart = loadCartFromLocalStorage();
+        setCart(savedCart);
     }, []);
-  
-    
+
+
     const updateCart = (updatedCart) => {
-      setCart(updatedCart);
-      saveCartToLocalStorage(updatedCart);
+        setCart(updatedCart);
+        saveCartToLocalStorage(updatedCart);
     };
-  
- 
+
+
     const handleAddToCart = () => {
         const updatedCart = [...cart];
         const existingItemIndex = updatedCart.findIndex(item => item.id === data.id);
-    
+
         if (existingItemIndex === -1) {
             updatedCart.push({ ...data, quantity: quantity }); // Используем quantity из состояния
         } else {
             updatedCart[existingItemIndex].quantity += quantity; // Добавляем quantity в существующий товар
         }
-    
+
         updateCart(updatedCart); // Обновляем корзину
     };
-    
+
     const handleUpdateQuantity = (newQuantity) => {
         setQuantity(newQuantity); // Обновляем локальное состояние quantity
-    
+
         if (Array.isArray(cart)) {
             const updatedCart = cart.map(item =>
                 item.id === data.id ? { ...item, quantity: newQuantity } : item // Обновляем quantity в корзине
@@ -46,7 +46,7 @@ function index() {
             updateCart(updatedCart); // Обновляем корзину
         }
     };
-  
+
     // const handleIncrement = () => {
     //   setQuantity(prev => {
     //     const newQuantity = prev + 1;
@@ -54,7 +54,7 @@ function index() {
     //     return newQuantity;
     //   });
     // };
-  
+
     // const handleDecrement = () => {
     //   if (quantity > 1) {
     //     setQuantity(prev => {
@@ -64,17 +64,17 @@ function index() {
     //     });
     //   }
     // };
-  
+
 
     useEffect(() => {
-      saveCartToLocalStorage(cart);
+        saveCartToLocalStorage(cart);
     }, [cart]);
-//    sdssdsdsd
+    //    sdssdsdsd
     useEffect(() => {
-        
+
         const found = products.find((i) => i.id === id)
         console.log(found);
-        
+
         setData(found)
     }, [id])
     // const data = {
@@ -137,7 +137,7 @@ function index() {
     ]
 
     useEffect(() => {
-        setMainImage(data?.id &&data?.images[0])
+        setMainImage(data?.id && data?.images[0])
     }, [data])
 
     function choseMainImageHandle(e) {
@@ -157,11 +157,11 @@ function index() {
         { id: "1", image: "/images/Rectangle 8.svg", title: "Блендер", newPrice: 450, oldPrice: 600, },
     ]
     return (
-        <Box sx={{ padding: "40px 30px" }}>
+        <Box sx={{ padding: { lg: "40px 30px", md: "20px 10px", sm: "20px 10px", xs: "20px 10px" } }}>
 
-            {/* 1 */} 
+            {/* 1 */}
             <Box sx={{ display: "flex" }}>
-                <Box sx={{ minWidth: "200px", marginRight: "20px" }}>
+                <Box sx={{ display: { lg: "block", md: "none", sm: "none", xs: "none" }, minWidth: "200px", marginRight: "20px" }}>
                     <Typography sx={{ fontSize: "12px", fontWeight: "bold", flexWrap: "nowrap", marginTop: "260px" }}>АКЫРКЫ БУЮМДАР</Typography>
                     <Box sx={{ display: "flex", flexDirection: "column", gap: "25px" }}>
                         {lastFurnitures.map((i) => (
@@ -193,21 +193,28 @@ function index() {
                 {/* -- */}
                 <div>
 
-                    <Box sx={{ display: "flex" }}>
+                    <Box sx={{ display: { lg: "flex", md: "block" } }}>
 
                         <Box sx={{ marginRight: "60px" }}>
-                            <Box sx={{ width: "550px", height: "550px" }}>
+                            <Box sx={{
+                                width: { md: "350px", sm: "300px", xs: "300px", lg: "550px" },
+                                height: { md: "350px", sm: "300px", xs: "300px", lg: "550px" }
+                            }}>
                                 <Box component="img" sx={{
                                     width: "100%",
                                     height: "100%",
                                     objectFit: "cover",
                                 }} src={mainImage} alt="" />
                             </Box>
-                            <Box sx={{ display: "flex", gap: "12px", padding: "15px 0" }}>
+                            <Box sx={{
+                                display: "flex", gap: "12px", padding: "15px 0", overflowX: "scroll",
+                                maxWidth: { md: "350px", sm: "300px", xs: "300px", lg: "550px" },
+                                // width: { lg: "600px", md: "500px", sm: "400px", xs: "300px" },
+                            }}>
                                 {data?.images?.map((i) => (
                                     <Box onClick={() => choseMainImageHandle(i)} sx={{ width: "100px", height: "100px" }}>
                                         <Box component="img" sx={{
-                                            width: "100%",
+                                            width: "100px",
                                             height: "100%",
                                             objectFit: "cover",
                                         }} src={i} alt="" />
@@ -290,12 +297,13 @@ function index() {
                                     {quantity}
                                     {/* <img src="/icons/+.svg" alt="" onClick={handleIncrement} /> */}
                                 </Box>
-                                <Button onClick={()=> {
+                                <Button onClick={() => {
                                     router.push('/cart')
-                                    handleAddToCart()}} sx={{ color: "#fff", bgcolor: "#FFA500", fontWeight: "bold", padding: "10px 15px" }}>
+                                    handleAddToCart()
+                                }} sx={{ color: "#fff", bgcolor: "#FFA500", fontWeight: "bold", padding: "10px 15px" }}>
                                     Себетке кошуу
                                 </Button>
-                                <Button onClick={()=> router.push('/cart')} sx={{ color: "#fff", bgcolor: "#FFA500", fontWeight: "bold", padding: "10px 15px" }}>
+                                <Button onClick={() => router.push('/cart')} sx={{ color: "#fff", bgcolor: "#FFA500", fontWeight: "bold", padding: "10px 15px" }}>
                                     Сатып алуу
                                 </Button>
                             </Box>
