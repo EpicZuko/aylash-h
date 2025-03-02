@@ -4,7 +4,11 @@ import React from 'react'
 function Footer() {
     return (
         <Box component="footer" >
-            <Box sx={{ background: "#FFA500", padding: "15px 0", display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+            <Box sx={{
+                background: "#FFA500", padding: "15px 0", display: "flex",
+                flexDirection: { lg: "row", md: "column", sm: "column", xs: "column" },
+                justifyContent: "space-around", alignItems: "center", gap: { lg: "0", md: "30px", sm: "30px", xs: "20px" }
+            }}>
                 <Box sx={{ display: "flex", justifyContent: "center", gap: "15px" }}>
                     <img src="/icons/ourbarakcha.svg" alt="" />
                     <Box>
@@ -13,12 +17,12 @@ function Footer() {
                             тараптар менен эч качан бөлүшпөйбүз</Typography>
                     </Box>
                 </Box>
-                <Box sx={{ height: "40px", minWidth: { md: "300px", lg: "500px" }, display: "flex" }}>
+                <Box sx={{ height: "40px", maxWidth: { lg: "1000px", sm: "350px", xs: "300px" }, minWidth: { md: "300px", lg: "500px" }, display: "flex" }}>
                     <Box component="input" placeholder='Электрондук почтаңызды киргизиңиз ...' sx={{
                         height: "100%", width: "100%", padding: "0 15px", borderRadius: "4px 0 0 4px",
                         border: "1px solid gray", outline: "none"
                     }} />
-                    <Button sx={{ background: "#3F444A", color: "#fff", borderRadius: "0 4px 4px 0", height: "100%" }}>
+                    <Button sx={{ background: "#3F444A", color: "#fff", borderRadius: "0 4px 4px 0", height: "100%", width: "120px" }}>
                         Жазылуу
                     </Button>
                 </Box>
@@ -32,7 +36,11 @@ function Footer() {
                     <img src="/icons/pinterest.svg" alt="" />
                 </Box>
             </Box>
-            <Box sx={{ display: "flex", justifyContent: "space-around", padding: "30px 0", alignItems: "start" }}>
+            <Box sx={{
+                display: "flex", justifyContent: "space-around",
+                padding: { lg: "30px 0", md: "30px 20px", sm: "30px 20px", xs: "30px 20px" }, alignItems: "start",
+                flexDirection: { lg: "row", md: "column", sm: "column", xs: "column" }, gap: { lg: "0", md: "30px", sm: "30px", xs: "20px" }
+            }}>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: "20px", justifyContent: "center", alignItems: "start" }}>
                     <img src="/icons/mainlogo.svg" alt="" />
                     <Box sx={{ display: "flex", gap: "15px", alignItems: "center", cursor: "pointer" }}>
@@ -94,7 +102,7 @@ function Footer() {
             </Box>
             <Box sx={{ bgcolor: "#FFA500", padding: "15px 0", display: "flex", justifyContent: "center" }}>
                 <Typography sx={{ color: "#fff" }}>
-                © 2025 Бишкек
+                    © 2025 Бишкек
                 </Typography>
             </Box>
         </Box>
