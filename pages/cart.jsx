@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { Modal, Box, Typography, Button } from "@mui/material";
-import { loadCartFromLocalStorage, saveCartToLocalStorage } from "@/helpers/CartUtils";
+import {
+  loadCartFromLocalStorage,
+  saveCartToLocalStorage,
+} from "@/helpers/CartUtils";
 
 const Container = styled.div`
   display: flex;
@@ -136,6 +139,24 @@ const OrderSummaryFullTravel = styled.p`
   line-height: 14.63px;
   padding: 30px 0px 0px 0px;
 `;
+const OrderMbankVisa = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 0px 20px 0px;
+`
+const OrderStyledH1 = styled.h1`
+  font-family: Montserrat;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14.63px;
+  letter-spacing: 0%;
+`;
+const  StyledMbakn = styled.div`
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+`
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState(() => loadCartFromLocalStorage());
@@ -272,6 +293,13 @@ export default function Cart() {
           <OrderSummaryTotal>
             <strong>Жалпы сумма: {grandTotal}KGS</strong>
           </OrderSummaryTotal>
+          <OrderMbankVisa>
+            <OrderStyledH1>ТОЛОМ ЖУРГУЗУУ:</OrderStyledH1>
+            <StyledMbakn>
+              <img src="/images/image 21.svg" alt="" />
+              <img src="/images/image 23.svg" alt="" />
+            </StyledMbakn>
+          </OrderMbankVisa>
           <OrderButton type="submit" disabled={cartItems.length === 0}>
             Буйруктаны каттоо
           </OrderButton>
